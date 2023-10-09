@@ -3,7 +3,6 @@ import React from 'react'
 import { VideoCard, ChannelCard } from './'
 
 const Videos = ({ videos, maxHeight }) => {
-  console.log(videos)
   return (
 
     <Stack
@@ -19,8 +18,8 @@ const Videos = ({ videos, maxHeight }) => {
     >
       {videos?.map((item, idx) => (
         <Box key={idx}>
-          {item.id.videoId && <VideoCard video={item} />}
-          {item.id.channelId && <ChannelCard channelDetail={item} width="350px" />}
+          {item.type === 'video' && <VideoCard video={item} />}
+          {item.type === 'channel' && <ChannelCard channelDetail={item} width="350px" />}
         </Box>
       ))}
 

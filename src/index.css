@@ -4,6 +4,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background-color: black;
 }
 
 a {
@@ -36,7 +37,7 @@ a {
 }
 
 .react-player {
-  height: 77vh !important;
+  height: 70vh !important;
   width: 100% !important;
 }
 

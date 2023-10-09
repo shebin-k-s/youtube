@@ -9,30 +9,33 @@ import { Videos } from './';
 
 const VideoDetail = () => {
 
-  const [videoDetail, setVideoDetail] = useState();
+  const [videoDetail, setVideoDetail] = useState(null);
   const [videos, setVideos] = useState();
 
   const { id } = useParams();
 
   useEffect(() => {
-    fetchFromAPI(`videos?part=snippet,statistics&id=${id}`)
-      .then((data) => setVideoDetail(data.items[0]))
+    fetchFromAPI(`video/info?id=${id}&extend=1`)
+      .then((data) => {
+        console.log(data)
+        setVideoDetail(data)
+      })
 
-    fetchFromAPI(`search?part=snippet&relatedToVideoId=${id}&type=video`)
-      .then((data) => setVideos(data.items))
+    fetchFromAPI(`related?id=${id}`)
+      .then((data) => {
+        setVideos(data.data)
+      })
 
   }, [id])
 
-  if (!videoDetail?.snippet) return 'Loading...'
-
-  const { snippet: { title, channelId, channelTitle },
-    statistics: { viewCount, likeCount } } = videoDetail;
+  if (!videoDetail) return 'Loading...'
+  const { channelId, channelThumbnail, channelTitle, description, publishDate, title, likeCount, viewCount } = videoDetail
 
   return (
     <Box minHeight="90vh">
       <Stack direction={{ xs: "column", md: 'row' }}>
-        <Box flex={10}>
-          <Box sx={{ width: '100%', position: 'sticky', top: '86px' }}>
+        <Box flex={3} sx={{ maxHeight: '90vh', overflowY: 'auto' }}>
+          <Box sx={{ width: '100%', position: 'sticky', top: '86px'}}>
             <ReactPlayer
               url={`https://www.youtube.com/watch?v=${id}`}
               className="react-player"
@@ -60,6 +63,12 @@ const VideoDetail = () => {
                 </Typography>
               </Stack>
             </Stack>
+              <ol>
+                <li>s</li>
+                <li>s</li>
+                <li>s</li>
+                <li>s</li>
+              </ol>
           </Box>
         </Box>
         <Box
@@ -68,8 +77,11 @@ const VideoDetail = () => {
           py={{ md: 0, xs: 5 }}
           justifyContent="center"
           alignItems="center"
+          sx={{ maxHeight: '90vh', overflowY: 'auto' }}
+
+
         >
-          <Videos videos={videos} maxHeight={'100%'}/>
+          <Videos videos={videos} maxHeight={'100%'} />
         </Box>
       </Stack >
 
