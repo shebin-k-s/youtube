@@ -5,6 +5,9 @@ import { demoProfilePicture } from '../utils/constants'
 import { CheckCircle } from '@mui/icons-material'
 
 const ChannelCard = ({ channelDetail, marginTop, width }) => {
+
+  if (!channelDetail) return 'Loading...'
+  const { channelId, channelTitle, thumbnail, subscriberCount } = channelDetail
   return (
 
     <Box
@@ -20,7 +23,7 @@ const ChannelCard = ({ channelDetail, marginTop, width }) => {
       }}
 
     >
-      <Link to={`/channel/${channelDetail?.id?.channelId}`}>
+      <Link to={`/channel/${channelId}`}>
         <CardContent
           sx={{
             display: 'flex',
@@ -30,8 +33,8 @@ const ChannelCard = ({ channelDetail, marginTop, width }) => {
             color: '#fff',
           }}>
           <CardMedia
-            image={channelDetail?.snippet?.thumbnails?.high?.url || demoProfilePicture}
-            alt={channelDetail?.snippet?.title}
+            image={thumbnail ?.url || demoProfilePicture}
+            alt={channelTitle}
             sx={{
               borderRadius: '50%',
               height: '180px',
@@ -41,14 +44,13 @@ const ChannelCard = ({ channelDetail, marginTop, width }) => {
             }}
           />
           <Typography variant='h6'>
-            {channelDetail?.snippet?.title}
+            {channelTitle}
             <CheckCircle sx={{ fontSize: 14, color: 'gray', ml: '5px' }} />
           </Typography>
-          {channelDetail?.statistics?.subscriberCount && (
-            <Typography>
-              {parseInt(channelDetail?.statistics?.subscriberCount).toLocaleString()} Subscribers
-            </Typography>
-          )}
+          <Typography>
+            {subscriberCount} Subscribers
+          </Typography>
+
 
         </CardContent>
 

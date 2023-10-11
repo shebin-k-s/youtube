@@ -8,13 +8,27 @@ import { useParams } from 'react-router-dom'
 const SearchFeed = () => {
   const theme = useTheme();
 
-  const {searchTerm} = useParams()
+  const { searchTerm } = useParams()
   const [videos, setVideos] = useState([])
 
   useEffect(() => {
-    fetchFromAPI(`search?part=snippet&q=${searchTerm}`)
+    fetchFromAPI(`search?query=${searchTerm}`)
       .then((data) => {
-        setVideos(data.items)
+        console.log(data.data)
+        const videosWithChannelDetails = data.data.map((video) => ({
+          channelId: video.channelId,
+          channelTitle: video.channelTitle,
+          channelThumbnail: video.channelThumbnail?.[0],
+          thumbnail: video.thumbnail?.[1],
+          subscriberCount: video.subscriberCount,
+          title: video.title,
+          type: video.type,
+          videoId: video.videoId,
+          viewCount: video.viewCount,
+          publishDate: video.publishDate
+        }));
+
+        setVideos(videosWithChannelDetails)
       })
 
   }, [searchTerm])
@@ -23,7 +37,7 @@ const SearchFeed = () => {
     <Stack
       sx={{
         flexDirection: { sx: "column", sm: "row" },
-        height: { xs: 'auto', sm: '86vh' }, // Use vh unit for height
+        height: { xs: 'auto', sm: '86vh' },
       }}
       py={2}
     >

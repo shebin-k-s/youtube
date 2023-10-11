@@ -11,31 +11,46 @@ const ChannelDetail = () => {
 
 
   const { id } = useParams()
-  console.log(id)
 
   useEffect(() => {
-    fetchFromAPI(`channels?part=snippet&id=${id}`)
+    fetchFromAPI(`channel/videos?id=${id}`)
       .then((data) => {
-        setChannelDetail(data?.items[0])
-      })
+        const channelDetails = {
+          channelId: data.meta.channelId,
+          channelTitle: data.meta.title,
+          thumbnail: data.meta.avatar?.[2],
+          subscriberCount: data.meta.subscriberCountText,
+        };
+        setChannelDetail(channelDetails)
+        const channelId = id
 
-    fetchFromAPI(`search?part=snippet&channelId=${id}&order=date`)
-      .then((data) => {
-        console.log(data.items)
-        setVideos(data?.items)
+        const videosWithChannelDetails = data.data.map((video) => ({
+          channelId,
+          channelTitle: data.meta.title,
+          channelThumbnail: data.meta.avatar?.[0],
+          thumbnail: video.thumbnail?.[3],
+          title: video.title,
+          type: video.type,
+          videoId: video.videoId,
+          viewCount: video.viewCount,
+          publishDate: video.publishDate
+        }));
+        setVideos(videosWithChannelDetails)
+
       })
   }, [id])
+
   return (
     <Box minHeight="90vh">
       <Box>
         <div style={{
           background: 'linear-gradient(0deg, rgba(33,91,201,1) 4%, rgba(246,43,201,0.9444444444444444) 86%)',
-          height:'300px'
+          height: '300px'
         }} />
         <ChannelCard channelDetail={channelDetail} marginTop="-110px" width="100%" />
       </Box>
       <Box display="flex" p="2">
-          <Videos videos={videos}/>
+        <Videos videos={videos} />
 
 
       </Box>

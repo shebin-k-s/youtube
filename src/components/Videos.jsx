@@ -12,15 +12,17 @@ const Videos = ({ videos, maxHeight }) => {
       gap={2}
       overflow='auto'
       maxHeight={maxHeight || "80vh"}
-      sx={{ justifyContent: 'center'}}
+      sx={{ justifyContent: 'center' }}
 
 
     >
       {videos?.map((item, idx) => (
-        <Box key={idx}>
-          {item.type === 'video' && <VideoCard video={item} />}
-          {item.type === 'channel' && <ChannelCard channelDetail={item} width="350px" />}
-        </Box>
+        (item.type === 'video' || item.type === 'channel') && (
+          <Box key={idx}>
+            {item.type === 'video' && <VideoCard video={item} />}
+            {item.type === 'channel' && <ChannelCard channelDetail={item} width="358px" />}
+          </Box>
+        )
       ))}
 
     </Stack>

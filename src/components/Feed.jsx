@@ -13,7 +13,19 @@ const Feed = () => {
   useEffect(() => {
     fetchFromAPI(`search?query=${selectedCategory}`)
       .then((data) => {
-        setVideos(data.data)
+        const videosWithChannelDetails = data.data.map((video) => ({
+          channelId: video.channelId,
+          channelTitle: video.channelTitle,
+          channelThumbnail: video.channelThumbnail?.[0],
+          thumbnail: video.thumbnail?.[1],
+          subscriberCount: video.subscriberCount,
+          title: video.title,
+          type: video.type,
+          videoId: video.videoId,
+          viewCount: video.viewCount,
+          publishDate: video.publishDate
+        }));
+        setVideos(videosWithChannelDetails)
       })
 
   }, [selectedCategory])
@@ -22,7 +34,7 @@ const Feed = () => {
     <Stack
       sx={{
         flexDirection: { sx: "column", sm: "row" },
-        height: { xs: 'auto', sm: '86vh' }, // Use vh unit for height
+        height: { xs: 'auto', sm: '86vh' },
       }}
       py={2}
     >
