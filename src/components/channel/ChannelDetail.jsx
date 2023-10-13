@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
-import { fetchFromAPI } from '../utils/FetchFromAPI'
+import { fetchFromAPI } from '../../utils/FetchFromAPI'
 import { useParams } from 'react-router-dom'
 import { Box } from '@mui/material'
-import { ChannelCard, Videos } from './'
+import { ChannelCard, Videos } from '..'
+import ChannelCardSkeleton from './ChannelCardSkeleton'
 
 const ChannelDetail = () => {
 
@@ -22,6 +23,7 @@ const ChannelDetail = () => {
           subscriberCount: data.meta.subscriberCountText,
         };
         setChannelDetail(channelDetails)
+        console.log(channelDetails)
         const channelId = id
 
         const videosWithChannelDetails = data.data.map((video) => ({
@@ -47,7 +49,10 @@ const ChannelDetail = () => {
           background: 'linear-gradient(0deg, rgba(33,91,201,1) 4%, rgba(246,43,201,0.9444444444444444) 86%)',
           height: '300px'
         }} />
-        <ChannelCard channelDetail={channelDetail} marginTop="-110px" width="100%" />
+        {
+          channelDetail ?
+            <ChannelCard channelDetail={channelDetail} marginTop="-110px" width="100%" /> : <ChannelCardSkeleton marginTop="-110px" width="100%"/>
+        }
       </Box>
       <Box display="flex" p="2">
         <Videos videos={videos} />

@@ -1,6 +1,6 @@
 import React from "react"
 import { Stack } from "@mui/material"
-import { categories } from "../utils/constants"
+import { categories } from "../../utils/constants"
 
 
 

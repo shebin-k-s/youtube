@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Box, Stack, Typography, useTheme } from '@mui/material'
-import { Sidebar, Videos } from './'
+import { Sidebar, Videos } from '..'
 
-import { fetchFromAPI } from '../utils/FetchFromAPI'
+import { fetchFromAPI } from '../../utils/FetchFromAPI'
 
 const Feed = () => {
   const theme = useTheme();
@@ -11,13 +11,15 @@ const Feed = () => {
   const [videos, setVideos] = useState([])
 
   useEffect(() => {
+    setVideos(null)
     fetchFromAPI(`search?query=${selectedCategory}`)
       .then((data) => {
+        console.log(data)
         const videosWithChannelDetails = data.data.map((video) => ({
           channelId: video.channelId,
           channelTitle: video.channelTitle,
           channelThumbnail: video.channelThumbnail?.[0],
-          thumbnail: video.thumbnail?.[1],
+          thumbnail: video.thumbnail ? (video.thumbnail[1] ?? video.thumbnail[0]) : undefined,
           subscriberCount: video.subscriberCount,
           title: video.title,
           type: video.type,

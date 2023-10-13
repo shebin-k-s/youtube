@@ -1,11 +1,11 @@
 import { Box, Stack, Typography } from '@mui/material'
 import { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
-import { fetchFromAPI } from '../utils/FetchFromAPI';
+import { fetchFromAPI } from '../../utils/FetchFromAPI';
 import { Link, useParams } from 'react-router-dom';
 import { CheckCircle } from '@mui/icons-material';
 import numeral from 'numeral';
-import { Videos } from './';
+import { Videos } from '..';
 
 const VideoDetail = () => {
 
