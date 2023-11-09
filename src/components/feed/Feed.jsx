@@ -12,14 +12,13 @@ const Feed = () => {
 
   useEffect(() => {
     setVideos(null)
-    fetchFromAPI(`search?query=${selectedCategory}`)
+    fetchFromAPI(selectedCategory!=='Trending'?`search?query=${selectedCategory}`:`trending?geo=IN`)
       .then((data) => {
-        console.log(data)
         const videosWithChannelDetails = data.data.map((video) => ({
           channelId: video.channelId,
           channelTitle: video.channelTitle,
           channelThumbnail: video.channelThumbnail?.[0],
-          thumbnail: video.thumbnail ? (video.thumbnail[1] ?? video.thumbnail[0]) : undefined,
+          thumbnail: video.thumbnail ? (video.thumbnail[2]??video.thumbnail[1] ?? video.thumbnail[0]) : undefined,
           subscriberCount: video.subscriberCount,
           title: video.title,
           type: video.type,

@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Box } from '@mui/material'
-import { ChannelDetail, Feed, Navbar, SearchFeed, SkeletonVideoCard, VideoDetail } from './components'
+import { ChannelDetail, Feed, Navbar, SearchFeed, VideoDetail } from './components'
 
 
 const App = () => {
@@ -18,7 +18,6 @@ const App = () => {
 
             </Box>
         </BrowserRouter>
-        // <SkeletonVideoCard />
     )
 }
 

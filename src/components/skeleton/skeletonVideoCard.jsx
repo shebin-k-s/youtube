@@ -6,7 +6,7 @@ const skeletonVideoCard = () => {
     return (
 
         <Card className='skeleton-card' sx={{
-            width: { xs: '320px', md: '336px' },
+            width: { xs: '350px', md: '336px' },
             boxShadow: 'none',
             backgroundColor: 'black'
         }}>
@@ -14,9 +14,9 @@ const skeletonVideoCard = () => {
                 sx={{
                     borderRadius: '15px',
                     width: {
-                        xs: '320px', md: '336px'
+                        xs: '350px', md: '336px'
                     },
-                    height: 188,
+                    height: '200px',
                     backgroundColor: '#252525'
                 }}
             />

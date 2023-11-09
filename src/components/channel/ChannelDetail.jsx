@@ -16,6 +16,7 @@ const ChannelDetail = () => {
   useEffect(() => {
     fetchFromAPI(`channel/videos?id=${id}`)
       .then((data) => {
+        console.log(data)
         const channelDetails = {
           channelId: data.meta.channelId,
           channelTitle: data.meta.title,
@@ -23,7 +24,6 @@ const ChannelDetail = () => {
           subscriberCount: data.meta.subscriberCountText,
         };
         setChannelDetail(channelDetails)
-        console.log(channelDetails)
         const channelId = id
 
         const videosWithChannelDetails = data.data.map((video) => ({

@@ -3,6 +3,7 @@ import React from 'react'
 import { VideoCard, ChannelCard, SkeletonVideoCard } from '..'
 
 const Videos = ({ videos, maxHeight }) => {
+  console.log(videos)
   const screen_width = window.innerWidth;
 
   return (
@@ -23,7 +24,7 @@ const Videos = ({ videos, maxHeight }) => {
           (item.type === 'video' || item.type === 'channel') && (
             <Box key={idx}>
               {item.type === 'video' && <VideoCard video={item} />}
-              {item.type === 'channel' && <ChannelCard channelDetail={item} width={screen_width >= 600 ? '336px' : '320px'}
+              {item.type === 'channel' && <ChannelCard channelDetail={item} width={screen_width >= 600 ? '336px' : '350px'}
               />}
             </Box>
           )

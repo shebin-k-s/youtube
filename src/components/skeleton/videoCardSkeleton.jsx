@@ -9,10 +9,10 @@ const videoCardSkeleton = ({ sx }) => {
             sx={{
                 borderRadius: '15px',
                 width: {
-                    xs: '320px',
+                    xs: '350px',
                     md: '336px',
                 },
-                height: 188,
+                height: '200px',
                 backgroundColor: '#252525',
                 ...sx
             }}

@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { CheckCircle } from '@mui/icons-material'
 import VideoCardSkeleton from '../skeleton/videoCardSkeleton'
-import ChannelCardSkeleton from './ChannelCardSkeleton'
 
 const ChannelCard = ({ channelDetail, marginTop, width }) => {
 
